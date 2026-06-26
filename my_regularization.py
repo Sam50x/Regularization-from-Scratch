@@ -5,7 +5,7 @@ class Regularization:
     def __init__(self):
         self.is_fitted = False
 
-    def fit(self, X, y, epochs=1000, learning_rate=0.01, loss_function='mse', lambada=0.1, mode='ridge'):
+    def fit(self, X, y, epochs=1000, learning_rate=0.01, loss_function='mse', regularization_rate=0.01, mode='ridge'):
         p = X.shape[1]
         np.random.seed(42)
 
@@ -17,10 +17,10 @@ class Regularization:
         for epoch in range(epochs):
             y_pred = self.__predict(X, w, b)
 
-            loss = self.__calculate_loss(y, y_pred, loss_function=loss_function)
+            loss = self.__calculate_loss(y, y_pred, loss_function, w, mode, regularization_rate)
             losses.append(loss)
 
-            grad_b, grad_w = self.__calculate_gradients(X, y, y_pred)
+            grad_b, grad_w = self.__calculate_gradients(X, y, y_pred, w, mode, regularization_rate)
 
             b = b - learning_rate * grad_b
             w = w - learning_rate * grad_w
@@ -46,7 +46,7 @@ class Regularization:
         y_pred = np.dot(X, w.T) + b
         return y_pred
 
-    def __calculate_loss(self, y_true, y_pred, loss_function):
+    def __calculate_loss(self, y_true, y_pred, loss_function, w, mode, regularization_rate):
         n = len(y_true)
 
         if loss_function == 'mse':
@@ -56,12 +56,24 @@ class Regularization:
         elif loss_function == 'mae':
             loss = np.sum(abs(y_pred - y_true)) / n
 
-        return loss
+        if mode == 'ridge':
+            regularized_term = regularization_rate * np.sum(w ** 2)
+        elif mode == 'lasso':
+            regularized_term = regularization_rate * np.sum(abs(w))
 
-    def __calculate_gradients(self, X, y_true, y_pred):
+        return loss + regularized_term
+
+    def __calculate_gradients(self, X, y_true, y_pred, w, mode, regularization_rate):
         n = len(y_true)
 
         grad_b = 2 * (np.sum(y_pred - y_true)) / n
         grad_w = 2 * (np.dot((y_pred - y_true).T, X)) / n
+
+        if mode == 'ridge':
+            regularization_term = 2 * regularization_rate * w
+        elif mode == 'lasso':
+            regularization_term = regularization_rate * np.sign(w)
+            
+        grad_w += regularization_term
 
         return grad_b, grad_w

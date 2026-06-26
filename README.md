@@ -12,4 +12,6 @@ That's where Regularization comes in. My name is Seif Adin, a Data Science stude
 
 ## Regularization
 
+
+
 ## Outro
