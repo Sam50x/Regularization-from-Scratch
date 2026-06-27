@@ -14,15 +14,15 @@ That's where Regularization comes in. My name is Seif Adin, a Data Science stude
 
 I started the project by copying the code of my last linear regression project. All I'll need to add is just some new parameters and some new lines here and there.
 
-The new parameters are the `Regularization Rate`, which means how much of regularization will we be adding and the `mode` which is the type we will be using.
+The new parameters are the `Regularization Rate`, which means how much of regularization we will be adding, and the `mode` which is the type of regularization we will be using.
 
-Regularization has many types. The most famous ones are: Ridge and Lasso. Each add a constrain to the model to make sure it doesn't learn a huge weight for one the features.
+Regularization has many types. The most famous ones are: Ridge and Lasso. Each adds a constrain to the model to make sure it doesn't learn a huge weight for one the features.
 
 Ridge adds the sum of squared weights as penalty. It shrinks weights towards zero but doesn't eliminate them completely, reducing model complexity while keeping all features.
 
 Lasso, on the other hand, adds the sum of absolute weights as penalty. Which leads to driving some weights to zero, Which is a simple way to perform feature selection.
 
-After finishing the module, I decided to evaluate it using the same dataset I used to evaluate my previous Linear Regression: The house prices datasets on Kaggle. Ridge Regression performed slightly better than our previous score. Lasso wasn't as good but at least Ridge made me proud.
+After finishing the module, I decided to evaluate it using the same dataset I used to evaluate my previous Linear Regression: The house prices dataset on Kaggle. Ridge Regression performed slightly better than our previous score. Lasso wasn't as good but at least Ridge made me proud.
 
 ## Outro
 
