@@ -1,5 +1,7 @@
 # Regularization: From Scratch
 
+[![Regularization From Scratch](https://img.youtube.com/vi/CIC-gZreHME/maxresdefault.jpg)](https://youtu.be/CIC-gZreHME)
+
 ## Intro
 
 In the last video, I built Linear Regression from scratch. It worked. But here's the problem — if you give it enough features, it'll fit your training data perfectly. And that's actually a disaster.
